@@ -1,0 +1,68 @@
+name: Build and Release Wheel
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Update disitribution
+      run: sudo apt-get update && sudo apt-get upgrade -y
+
+    - name: Install dependencies
+      run: sudo apt-get install build-essential libgtk-3-dev
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Create and start virtual environment
+      run: |
+        python3 -m venv venv
+        source venv/bin/activate
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install six wheel setuptools
+
+    - name: Download wxPython
+      run: |
+        pip download -r requirements.txt
+
+    - name: Get version of wxPython out of requirements.txt
+      id: get_wx_version
+      run: |
+        echo "wx_version=$(cat requirements.txt | grep wxPython | cut -d'=' -f2)" >> $GITHUB_OUTPUT
+
+    - name: Build wheel
+      run: |
+        pip wheel -v wxPython-${{ steps.get_wx_version.outputs.wx_version }}.tar.gz
+
+    - name: Upload wheel
+      uses: actions/upload-artifact@v4
+      with:
+        name: wheel-file
+        path: dist/*.whl
+
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ steps.get_wx_version.outputs.wx_version }}
+        name: wxPython WHL ${{ steps.get_wx_version.outputs.wx_version }}
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+        files: |
+            wheel-file       
