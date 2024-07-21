@@ -43,7 +43,7 @@ jobs:
     - name: Get version of wxPython out of requirements.txt
       id: get_wx_version
       run: |
-        echo "wx_version=$(cat requirements.txt | grep wxPython | cut -d'=' -f2)" >> $GITHUB_OUTPUT
+        echo "wx_version=$(cat requirements.txt | grep wxPython | cut -d'=' -f3)" >> $GITHUB_OUTPUT
 
     - name: Build wheel
       run: |
