@@ -53,7 +53,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: wxPython-${{ steps.get_wx_version.outputs.wx_version }}.whl
-        path: dist/*.whl
+        path: dist/wxPython-${{ steps.get_wx_version.outputs.wx_version }}-cp312-cp312-linux_x86_64.whl.whl
 
     - name: Create Release
       id: create_release
