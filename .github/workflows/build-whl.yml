@@ -76,4 +76,4 @@ jobs:
           prerelease: false
           generate_release_notes: true
           files: |
-              wxPython-${{ needs.build.outputs.wx_version }}.whl
+              wxPython-${{ needs.build.outputs.wx_version }}-cp312-cp312-linux_x86_64.whl
