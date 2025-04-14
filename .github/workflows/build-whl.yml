@@ -55,7 +55,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: wxPython-${{ steps.get_wx_version.outputs.wx_version }}.whl
-        path: dist/wxPython-${{ steps.get_wx_version.outputs.wx_version }}-cp313-cp313-linux_x86_64.whl
+        path: dist/wxpython-${{ steps.get_wx_version.outputs.wx_version }}-cp313-cp313-linux_x86_64.whl
 
   release:
     runs-on: ubuntu-latest
