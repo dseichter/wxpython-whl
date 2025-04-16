@@ -40,7 +40,7 @@ jobs:
     - name: Strip Python version dots
       id: strip_python_version
       run: |
-        NO_DOTS=sed 's/\.//g' <<< "${{ matrix.python-version }}"
+        NO_DOTS=$(echo "${{ matrix.python-version }}" | tr -d '.')
         echo "python_version_no_dots=$NO_DOTS" >> $GITHUB_OUTPUT
 
     - name: Install dependencies
