@@ -73,12 +73,12 @@ jobs:
 
     steps:
       - name: Download artifacts for Python 3.12
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: wxPython-${{ needs.build.outputs.wx_version }}-cp312-cp312-linux_x86_64.whl
 
       - name: Download artifacts for Python 3.13
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: wxPython-${{ needs.build.outputs.wx_version }}-cp313-cp313-linux_x86_64.whl
 
