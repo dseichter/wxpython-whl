@@ -62,7 +62,7 @@ jobs:
         pip wheel -v wxPython-${{ steps.get_wx_version.outputs.wx_version }}.tar.gz -w dist/
 
     - name: Upload wheel
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: wxPython-${{ steps.get_wx_version.outputs.wx_version }}-cp${{ steps.strip_python_version.outputs.python_version_no_dots }}-cp${{ steps.strip_python_version.outputs.python_version_no_dots }}-linux_x86_64.whl
         path: dist/wxpython-${{ steps.get_wx_version.outputs.wx_version }}-cp${{ steps.strip_python_version.outputs.python_version_no_dots }}-cp${{ steps.strip_python_version.outputs.python_version_no_dots }}-linux_x86_64.whl
